@@ -2,8 +2,9 @@
 
 int main (void) {  
 
-    int gold = 15;
-    int hp_goblin = 3;
+    int goblin_gold = 20;
+    int goblin_hp;
+    int pleyer_gold = 0;
     char hero = '@';
     char action;
 
@@ -14,39 +15,43 @@ int main (void) {
     action = getchar();
 
 
-    while (hp_goblin < 0 || action != 'r')
+    while (action != 'r')
     {
+
         if ( action == 'a' || action == 'A'){
-        hp_goblin = hp_goblin - 1;  // 1
-        printf("Мы пнули гоблина. Гоблин HP: %d\n", hp_goblin);
+
+            for (goblin_hp = 3; goblin_hp >= 0; goblin_hp--)
+            {
+                if(goblin_hp > 0 && goblin_hp < 3)
+                {
+                    printf("Мы пнули гоблина. Гоблин HP: %d\n", goblin_hp);
+                }
+
+                if(goblin_hp == 0 ) 
+                {
+                    printf("Мы победили гоблина\n");
+                    pleyer_gold += goblin_gold;
+                    printf("Мы нашли %d золотых. Всего %d золотых\n", goblin_gold, pleyer_gold);
+                    break;
+                }
+
+            }
         }
 
-        printf("Вы нажали: %c\n", action);
 
-        if(hp_goblin < 1) {
-        printf("Мы убили гоблина\n");
 
-        printf("Мы нашли %d золотых\n", gold);
-        }
-        else
-        {
-        printf("Гоблин убежал!!!\n");
 
-        }
-        if(hp_goblin <= 0) {
-            break;
-        }
 
-        printf("Что делать дальше?\n");
+        printf("Что делать дальше? (а)-атака или (r)-убежать\n");
         getchar();
         action = getchar();
         
 
     }
-    
-    printf("Вы решили убежать!!! Пока! \n");
+    if(action == 'r'){
+        printf("Вы решили убежать!!! Пока! \n");
 
-    
+    };
 
 
     return 0;
